@@ -1,4 +1,4 @@
-import { NextResponse } from "next/server"  
+import { NextResponse } from "next/server"
 import { db } from "@/lib/firebase-admin"
 
 function getMidnight() {
@@ -19,32 +19,33 @@ export async function POST(req: Request) {
         const today = getMidnight()
         const ref = db.ref(`users/${walletKey}`)
 
-        const result = await ref.transaction((current) => {
-            const data = current ?? {
-                username: "Guest",
-                chances: 1,
-                lastReset: today
-            }
+        // Read current data
+        const snap = await ref.get()
+        const data = snap.exists() ? snap.val() : {
+            username: "Guest",
+            chances: 1,
+            lastReset: today
+        }
 
-            if ((data.lastReset ?? 0) < today) {
-                data.chances = 1
-                data.lastReset = today
-            }
+        // Reset chances if it's a new day
+        if ((data.lastReset ?? 0) < today) {
+            data.chances = 1
+            data.lastReset = today
+        }
 
-            if ((data.chances ?? 0) <= 0) {
-                return
-            }
-
-            return {
-                ...data,
-                chances: (data.chances ?? 0) - 1,
-                lastReset: data.lastReset ?? today
-            }
-        })
-
-        if (!result.committed || !result.snapshot.exists()) {
+        // Check if chances available
+        if ((data.chances ?? 0) <= 0) {
             return NextResponse.json({ success: false })
         }
+
+        // Deduct one chance
+        const updated = {
+            ...data,
+            chances: data.chances - 1,
+            lastReset: data.lastReset ?? today
+        }
+
+        await ref.set(updated)
 
         return NextResponse.json({ success: true })
 
