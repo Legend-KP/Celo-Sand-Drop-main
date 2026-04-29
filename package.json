@@ -32,5 +32,10 @@
     "devDependencies": {
         "@opennextjs/cloudflare": "^1.19.3",
         "@types/node": "^22.19.15"
+    },
+    "pnpm": {
+        "overrides": {
+            "jose": "^5.9.6"
+        }
     }
 }

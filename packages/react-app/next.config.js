@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+  serverExternalPackages: ["firebase-admin", "jwks-rsa", "jose"],
   webpack: (config) => {
     config.resolve.fallback = {
       fs: false,
