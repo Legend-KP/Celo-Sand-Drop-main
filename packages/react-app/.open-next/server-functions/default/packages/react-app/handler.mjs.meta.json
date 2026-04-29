@@ -3394,42 +3394,47 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/updateUsername/route_client-reference-manifest.js": {
-      "bytes": 8529,
+      "bytes": 8379,
+      "imports": [],
+      "format": "cjs"
+    },
+    ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getLeaderboard/route_client-reference-manifest.js": {
+      "bytes": 8379,
       "imports": [],
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/addChances/route_client-reference-manifest.js": {
-      "bytes": 8521,
+      "bytes": 8371,
       "imports": [],
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/useChance/route_client-reference-manifest.js": {
-      "bytes": 8519,
+      "bytes": 8369,
       "imports": [],
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/saveScore/route_client-reference-manifest.js": {
-      "bytes": 8519,
+      "bytes": 8369,
       "imports": [],
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/addChance/route_client-reference-manifest.js": {
-      "bytes": 8519,
+      "bytes": 8369,
       "imports": [],
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/initUser/route_client-reference-manifest.js": {
-      "bytes": 8517,
+      "bytes": 8367,
       "imports": [],
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getUser/route_client-reference-manifest.js": {
-      "bytes": 8515,
+      "bytes": 8365,
       "imports": [],
       "format": "cjs"
     },
     "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/load-manifest.external.js": {
-      "bytes": 69442,
+      "bytes": 70021,
       "imports": [
         {
           "path": "path",
@@ -3455,6 +3460,11 @@
           "path": ".open-next/server-functions/default/packages/react-app/.next/server/app/api/updateUsername/route_client-reference-manifest.js",
           "kind": "require-call",
           "original": "E:\\kushal paliwal\\Coding\\Celo-Sand-Drop-main\\packages\\react-app\\.open-next\\server-functions\\default\\packages\\react-app\\.next\\server\\app\\api\\updateUsername\\route_client-reference-manifest.js"
+        },
+        {
+          "path": ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getLeaderboard/route_client-reference-manifest.js",
+          "kind": "require-call",
+          "original": "E:\\kushal paliwal\\Coding\\Celo-Sand-Drop-main\\packages\\react-app\\.open-next\\server-functions\\default\\packages\\react-app\\.next\\server\\app\\api\\getLeaderboard\\route_client-reference-manifest.js"
         },
         {
           "path": ".open-next/server-functions/default/packages/react-app/.next/server/app/api/addChances/route_client-reference-manifest.js",
@@ -23409,6 +23419,62 @@
       ],
       "format": "cjs"
     },
+    ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getLeaderboard/route.js": {
+      "bytes": 7586,
+      "imports": [
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/shared/lib/router/utils/app-paths.js",
+          "kind": "require-call",
+          "original": "next/dist/shared/lib/router/utils/app-paths"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/after-task-async-storage.external.js",
+          "kind": "require-call",
+          "original": "next/dist/server/app-render/after-task-async-storage.external.js"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/compiled/next-server/app-page.runtime.prod.js",
+          "kind": "require-call",
+          "original": "next/dist/compiled/next-server/app-page.runtime.prod.js"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/action-async-storage.external.js",
+          "kind": "require-call",
+          "original": "next/dist/server/app-render/action-async-storage.external.js"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/work-async-storage.external.js",
+          "kind": "require-call",
+          "original": "next/dist/server/app-render/work-async-storage.external.js"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/compiled/next-server/app-route.runtime.prod.js",
+          "kind": "require-call",
+          "original": "next/dist/compiled/next-server/app-route.runtime.prod.js"
+        },
+        {
+          "path": "../../node_modules/.pnpm/firebase-admin@13.8.0_encoding@0.1.13/node_modules/firebase-admin/lib/index.js",
+          "kind": "require-call",
+          "original": "firebase-admin"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/work-unit-async-storage.external.js",
+          "kind": "require-call",
+          "original": "next/dist/server/app-render/work-unit-async-storage.external.js"
+        },
+        {
+          "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/shared/lib/no-fallback-error.external.js",
+          "kind": "require-call",
+          "original": "next/dist/shared/lib/no-fallback-error.external"
+        },
+        {
+          "path": ".open-next/server-functions/default/packages/react-app/.next/server/webpack-runtime.js",
+          "kind": "require-call",
+          "original": "../../../webpack-runtime.js"
+        }
+      ],
+      "format": "cjs"
+    },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/api/updateUsername/route.js": {
       "bytes": 7467,
       "imports": [
@@ -24221,7 +24287,7 @@
       "format": "cjs"
     },
     ".open-next/server-functions/default/packages/react-app/.next/server/app/page.js": {
-      "bytes": 250894,
+      "bytes": 19233,
       "imports": [
         {
           "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/shared/lib/router/utils/app-paths.js",
@@ -24240,11 +24306,6 @@
         },
         {
           "path": "assert",
-          "kind": "require-call",
-          "external": true
-        },
-        {
-          "path": "net",
           "kind": "require-call",
           "external": true
         },
@@ -24284,19 +24345,9 @@
           "external": true
         },
         {
-          "path": "tls",
-          "kind": "require-call",
-          "external": true
-        },
-        {
           "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/dynamic-access-async-storage.external.js",
           "kind": "require-call",
           "original": "next/dist/server/app-render/dynamic-access-async-storage.external.js"
-        },
-        {
-          "path": "crypto",
-          "kind": "require-call",
-          "external": true
         },
         {
           "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/work-unit-async-storage.external.js",
@@ -24319,19 +24370,9 @@
           "external": true
         },
         {
-          "path": "url",
-          "kind": "require-call",
-          "external": true
-        },
-        {
           "path": "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/shared/lib/no-fallback-error.external.js",
           "kind": "require-call",
           "original": "next/dist/shared/lib/no-fallback-error.external"
-        },
-        {
-          "path": "events",
-          "kind": "require-call",
-          "external": true
         },
         {
           "path": ".open-next/server-functions/default/packages/react-app/.next/server/webpack-runtime.js",
@@ -24342,7 +24383,7 @@
       "format": "cjs"
     },
     "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/require.js": {
-      "bytes": 17997,
+      "bytes": 18295,
       "imports": [
         {
           "path": "path",
@@ -24388,6 +24429,11 @@
           "path": "fs",
           "kind": "require-call",
           "external": true
+        },
+        {
+          "path": ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getLeaderboard/route.js",
+          "kind": "require-call",
+          "original": "E:\\kushal paliwal\\Coding\\Celo-Sand-Drop-main\\packages\\react-app\\.open-next\\server-functions\\default\\packages\\react-app\\.next\\server\\app\\api\\getLeaderboard\\route.js"
         },
         {
           "path": ".open-next/server-functions/default/packages/react-app/.next/server/app/api/updateUsername/route.js",
@@ -26242,7 +26288,7 @@
       "format": "esm"
     },
     ".open-next/server-functions/default/packages/react-app/index.mjs": {
-      "bytes": 87750,
+      "bytes": 87802,
       "imports": [
         {
           "path": "node:module",
@@ -28032,11 +28078,6 @@
           "external": true
         },
         {
-          "path": "net",
-          "kind": "require-call",
-          "external": true
-        },
-        {
           "path": "stream",
           "kind": "require-call",
           "external": true
@@ -28057,16 +28098,6 @@
           "external": true
         },
         {
-          "path": "tls",
-          "kind": "require-call",
-          "external": true
-        },
-        {
-          "path": "crypto",
-          "kind": "require-call",
-          "external": true
-        },
-        {
           "path": "zlib",
           "kind": "require-call",
           "external": true
@@ -28078,16 +28109,6 @@
         },
         {
           "path": "buffer",
-          "kind": "require-call",
-          "external": true
-        },
-        {
-          "path": "url",
-          "kind": "require-call",
-          "external": true
-        },
-        {
-          "path": "events",
           "kind": "require-call",
           "external": true
         },
@@ -29119,28 +29140,31 @@
           "bytesInOutput": 639
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/updateUsername/route_client-reference-manifest.js": {
-          "bytesInOutput": 8053
+          "bytesInOutput": 7903
+        },
+        ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getLeaderboard/route_client-reference-manifest.js": {
+          "bytesInOutput": 7904
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/addChances/route_client-reference-manifest.js": {
-          "bytesInOutput": 8042
+          "bytesInOutput": 7892
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/useChance/route_client-reference-manifest.js": {
-          "bytesInOutput": 8039
+          "bytesInOutput": 7889
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/saveScore/route_client-reference-manifest.js": {
-          "bytesInOutput": 8039
+          "bytesInOutput": 7889
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/addChance/route_client-reference-manifest.js": {
-          "bytesInOutput": 8039
+          "bytesInOutput": 7889
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/initUser/route_client-reference-manifest.js": {
-          "bytesInOutput": 8036
+          "bytesInOutput": 7886
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getUser/route_client-reference-manifest.js": {
-          "bytesInOutput": 8033
+          "bytesInOutput": 7883
         },
         "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/load-manifest.external.js": {
-          "bytesInOutput": 57008
+          "bytesInOutput": 57346
         },
         "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/app-render/action-async-storage-instance.js": {
           "bytesInOutput": 554
@@ -31977,8 +32001,11 @@
         ".open-next/server-functions/default/packages/react-app/.next/server/webpack-runtime.js": {
           "bytesInOutput": 4015
         },
+        ".open-next/server-functions/default/packages/react-app/.next/server/app/api/getLeaderboard/route.js": {
+          "bytesInOutput": 7771
+        },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/updateUsername/route.js": {
-          "bytesInOutput": 7634
+          "bytesInOutput": 7635
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/api/addChances/route.js": {
           "bytesInOutput": 7942
@@ -32047,10 +32074,10 @@
           "bytesInOutput": 3636
         },
         ".open-next/server-functions/default/packages/react-app/.next/server/app/page.js": {
-          "bytesInOutput": 270881
+          "bytesInOutput": 19604
         },
         "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/server/require.js": {
-          "bytesInOutput": 14014
+          "bytesInOutput": 14115
         },
         "../../node_modules/.pnpm/next@15.5.15_@babel+core@7._2b0b8c9303cbcfec12b975f9553f5221/node_modules/next/dist/lib/wait.js": {
           "bytesInOutput": 394
@@ -32278,10 +32305,10 @@
           "bytesInOutput": 5093
         },
         ".open-next/server-functions/default/packages/react-app/index.mjs": {
-          "bytesInOutput": 57847
+          "bytesInOutput": 57897
         }
       },
-      "bytes": 11053984
+      "bytes": 10817822
     }
   }
 }
