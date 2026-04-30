@@ -4,6 +4,12 @@
     "compatibility_date": "2024-12-01",
     "compatibility_flags": ["nodejs_compat"],
     "keep_vars": true,
+    "routes": [
+        {
+            "pattern": "sanddrop2.trenchverse.com",
+            "custom_domain": true
+        }
+    ],
 
     "assets": {
         "directory": ".open-next/assets",
