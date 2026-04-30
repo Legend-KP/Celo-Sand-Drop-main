@@ -37,6 +37,12 @@ export default function Home() {
         return (window as any).ethereum
     }
 
+    function getNextMidnight() {
+        const d = new Date()
+        d.setHours(24, 0, 0, 0)
+        return d.getTime()
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         if (typeof window === "undefined") return; // 🚀 CRITICAL FIX
@@ -278,7 +284,7 @@ export default function Home() {
             sendToUnity("OnUserData", JSON.stringify({
                 username: localStorage.getItem("username") || "Guest",
                 chances: 1,
-                nextReset: Date.now() + 86400000
+                nextReset: getNextMidnight()
             }))
             return
         }
