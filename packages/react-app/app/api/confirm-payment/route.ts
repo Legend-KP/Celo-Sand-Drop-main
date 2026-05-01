@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import type { MiniAppPaymentSuccessPayload } from "@worldcoin/minikit-js"
+import type { MiniAppPaymentSuccessPayload } from "@worldcoin/minikit-js/commands"
 import { db } from "@/lib/firebase-admin"
 
 type WorldTxResponse = {
