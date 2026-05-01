@@ -40,7 +40,7 @@ const queryClient = new QueryClient();
 
 export function AppProvider({ children }: { children: React.ReactNode }) {
   return (
-    <MiniKitProvider>
+    <MiniKitProvider props={{ appId: process.env.NEXT_PUBLIC_APP_ID }}>
       <WagmiProvider config={config}>
         <QueryClientProvider client={queryClient}>
           <RainbowKitProvider>
