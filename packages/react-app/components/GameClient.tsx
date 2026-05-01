@@ -120,18 +120,18 @@ export default function Home() {
                         symbol: Tokens.USDC,
                         token_amount: tokenToDecimals(ENTRY_FEE_AMOUNT, Tokens.USDC).toString()
                     }],
-                    description: "Game entry fee"
+                    description: "Game entry fee",
+                    fallback: () => {
+                        throw new Error("Please complete payment in World App.")
+                    }
                 })
 
-                if (payResult?.data?.transactionId && payResult?.data?.reference) {
+                if (payResult.executedWith === "minikit" && payResult?.data?.transactionId && payResult?.data?.reference) {
                     const verified = await fetch("/api/confirm-payment", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            payload: {
-                                transaction_id: payResult.data.transactionId,
-                                reference: payResult.data.reference
-                            }
+                            payload: payResult.data
                         })
                     }).then((r) => r.json())
 
@@ -447,18 +447,18 @@ export default function Home() {
                         symbol: Tokens.USDC,
                         token_amount: tokenToDecimals(CHANCES_PRICE, Tokens.USDC).toString()
                     }],
-                    description: "Buy extra chances"
+                    description: "Buy extra chances",
+                    fallback: () => {
+                        throw new Error("Please complete payment in World App.")
+                    }
                 })
 
-                if (payResult?.data?.transactionId && payResult?.data?.reference) {
+                if (payResult.executedWith === "minikit" && payResult?.data?.transactionId && payResult?.data?.reference) {
                     const verified = await fetch("/api/confirm-payment", {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify({
-                            payload: {
-                                transaction_id: payResult.data.transactionId,
-                                reference: payResult.data.reference
-                            }
+                            payload: payResult.data
                         })
                     }).then((r) => r.json())
 

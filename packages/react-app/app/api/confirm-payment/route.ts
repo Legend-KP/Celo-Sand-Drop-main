@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server"
-import type { MiniAppPaymentSuccessPayload } from "@worldcoin/minikit-js/commands"
+import type { PayResult } from "@worldcoin/minikit-js/commands"
 import { db } from "@/lib/firebase-admin"
 
 type WorldTxResponse = {
@@ -8,13 +8,13 @@ type WorldTxResponse = {
 
 export async function POST(req: Request) {
     try {
-        const { payload } = await req.json() as { payload?: MiniAppPaymentSuccessPayload }
-        if (!payload?.transaction_id || !payload.reference) {
+        const { payload } = await req.json() as { payload?: PayResult }
+        if (!payload?.transactionId || !payload.reference) {
             return NextResponse.json({ success: false, error: "Invalid payload" }, { status: 400 })
         }
 
-        const appId = process.env.NEXT_PUBLIC_APP_ID
-        const apiKey = process.env.WORLD_DEV_PORTAL_API_KEY
+        const appId = process.env.APP_ID ?? process.env.NEXT_PUBLIC_APP_ID
+        const apiKey = process.env.DEV_PORTAL_API_KEY ?? process.env.WORLD_DEV_PORTAL_API_KEY
         if (!appId || !apiKey) {
             return NextResponse.json({ success: false, error: "Missing World env vars" }, { status: 500 })
         }
@@ -26,7 +26,7 @@ export async function POST(req: Request) {
         }
 
         const response = await fetch(
-            `https://developer.worldcoin.org/api/v2/minikit/transaction/${payload.transaction_id}?app_id=${appId}&type=payment`,
+            `https://developer.worldcoin.org/api/v2/minikit/transaction/${payload.transactionId}?app_id=${appId}&type=payment`,
             {
                 headers: {
                     Authorization: `Bearer ${apiKey}`
@@ -51,7 +51,7 @@ export async function POST(req: Request) {
         await paymentRef.update({
             status: success ? "confirmed" : "failed",
             checkedAt: Date.now(),
-            transactionId: payload.transaction_id
+            transactionId: payload.transactionId
         })
 
         return NextResponse.json({ success })
