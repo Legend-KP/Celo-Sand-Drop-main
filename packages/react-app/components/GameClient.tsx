@@ -4,12 +4,8 @@ import { saveScore, getLeaderboard } from "@/lib/Leaderboard"
 import { encodeFunctionData } from "viem"
 import { initUser, getUser, consumeChance, addChances, updateUsername } from "@/lib/chances"
 import type { Address } from "viem"
-import { MiniKit } from "@worldcoin/minikit-js"
-import { Tokens, tokenToDecimals } from "@worldcoin/minikit-js/commands"
 const CONTRACT: Address = "0xafFb98DeCfc3e1E7867fA412Bf9580E377bE265a"
 const USDT: Address = "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
-const ENTRY_FEE_AMOUNT = 0.05
-const CHANCES_PRICE = 0.1
 
 
 export default function Home() {
@@ -39,11 +35,6 @@ export default function Home() {
     function getEthereum() {
         if (typeof window === "undefined") return null
         return (window as any).ethereum
-    }
-
-    function isWorldApp() {
-        if (typeof window === "undefined") return false
-        return MiniKit.isInstalled()
     }
 
     function getNextMidnight() {
@@ -106,48 +97,6 @@ export default function Home() {
     async function handlePayment() {
 
         if (typeof window === "undefined") return;
-
-        if (isWorldApp()) {
-            try {
-                const { id } = await fetch("/api/initiate-payment", {
-                    method: "POST"
-                }).then((r) => r.json())
-
-                const payResult = await MiniKit.pay({
-                    reference: id,
-                    to: process.env.NEXT_PUBLIC_WORLD_RECEIVING_WALLET!,
-                    tokens: [{
-                        symbol: Tokens.USDC,
-                        token_amount: tokenToDecimals(ENTRY_FEE_AMOUNT, Tokens.USDC).toString()
-                    }],
-                    description: "Game entry fee",
-                    fallback: () => {
-                        throw new Error("Please complete payment in World App.")
-                    }
-                })
-
-                if (payResult.executedWith === "minikit" && payResult?.data?.transactionId && payResult?.data?.reference) {
-                    const verified = await fetch("/api/confirm-payment", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            payload: payResult.data
-                        })
-                    }).then((r) => r.json())
-
-                    if (verified.success) {
-                        sendToUnity("OnPaymentSuccess", "")
-                        return
-                    }
-                }
-
-                sendToUnity("OnPaymentFailed", "WORLD_PAYMENT_NOT_CONFIRMED")
-            } catch (err: any) {
-                console.error("World App payment failed:", err)
-                sendToUnity("OnPaymentFailed", err?.message || "FAILED")
-            }
-            return
-        }
 
         try {
             // =========================
@@ -433,48 +382,6 @@ export default function Home() {
     async function buyChancesPayment(): Promise<boolean> {
 
         if (typeof window === "undefined") return false; // ✅ FIX
-
-        if (isWorldApp()) {
-            try {
-                const { id } = await fetch("/api/initiate-payment", {
-                    method: "POST"
-                }).then((r) => r.json())
-
-                const payResult = await MiniKit.pay({
-                    reference: id,
-                    to: process.env.NEXT_PUBLIC_WORLD_RECEIVING_WALLET!,
-                    tokens: [{
-                        symbol: Tokens.USDC,
-                        token_amount: tokenToDecimals(CHANCES_PRICE, Tokens.USDC).toString()
-                    }],
-                    description: "Buy extra chances",
-                    fallback: () => {
-                        throw new Error("Please complete payment in World App.")
-                    }
-                })
-
-                if (payResult.executedWith === "minikit" && payResult?.data?.transactionId && payResult?.data?.reference) {
-                    const verified = await fetch("/api/confirm-payment", {
-                        method: "POST",
-                        headers: { "Content-Type": "application/json" },
-                        body: JSON.stringify({
-                            payload: payResult.data
-                        })
-                    }).then((r) => r.json())
-
-                    if (verified.success) {
-                        return true
-                    }
-                }
-
-                sendToUnity("OnPurchaseFailed", "WORLD_PAYMENT_NOT_CONFIRMED")
-                return false
-            } catch (err: any) {
-                console.error("World App buy chances failed:", err)
-                sendToUnity("OnPurchaseFailed", err?.message || "FAILED")
-                return false
-            }
-        }
 
         try {
            
