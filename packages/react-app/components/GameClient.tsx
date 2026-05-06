@@ -15,6 +15,25 @@ export default function Home() {
     useEffect(() => {
         if (typeof window === "undefined") return; // 🚀 CRITICAL FIX
         initFirebase()
+
+        const preloadUserState = async () => {
+            try {
+                if (!window.ethereum) return
+
+                const accounts = await window.ethereum.request({
+                    method: "eth_accounts"
+                })
+
+                if (!accounts || accounts.length === 0) return
+
+                await getUser(accounts[0] as Address)
+            } catch (err) {
+                console.warn("Preload user failed", err)
+            }
+        }
+
+        void preloadUserState()
+
         if (typeof window !== "undefined" && window.ethereum) {
             window.ethereum.request({ method: "eth_accounts" });
         }
