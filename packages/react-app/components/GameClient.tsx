@@ -4,6 +4,7 @@ import { useEffect } from "react"
 import { saveScore, getLeaderboard } from "@/lib/Leaderboard"
 import { encodeFunctionData } from "viem"
 import { initUser, getUser, consumeChance, addChances, updateUsername } from "@/lib/chances"
+import { initFirebase } from "@/lib/firebase"
 import type { Address } from "viem"
 const CONTRACT: Address = "0xafFb98DeCfc3e1E7867fA412Bf9580E377bE265a"
 const USDT: Address = "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
@@ -13,6 +14,7 @@ export default function Home() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
         if (typeof window === "undefined") return; // 🚀 CRITICAL FIX
+        initFirebase()
         if (typeof window !== "undefined" && window.ethereum) {
             window.ethereum.request({ method: "eth_accounts" });
         }
@@ -239,12 +241,14 @@ export default function Home() {
     async function handleUseChance() {
         const wallet = await getWallet()
 
-        const updated = await consumeChance(wallet)
+        const success = await consumeChance(wallet)
 
-        if (!updated) {
+        if (!success) {
             sendToUnity("OnChanceUsed", "0")
             return
         }
+
+        const updated = await getUser(wallet)
 
         // 🔥 SEND FULL DATA BACK TO UNITY
         sendToUnity("OnUserData", JSON.stringify(updated))
@@ -268,7 +272,9 @@ export default function Home() {
 
         const wallet = await getWallet()
 
-        const updated = await addChances(wallet, CHANCE_REWARD)
+        await addChances(wallet, CHANCE_REWARD)
+
+        const updated = await getUser(wallet)
 
         // 🔥 SEND FULL DATA
         sendToUnity("OnUserData", JSON.stringify(updated))
@@ -402,7 +408,9 @@ export default function Home() {
     async function handleUpdateUsername(data: any) {
         const wallet = await getWallet()
 
-        const updated = await updateUsername(wallet, data.username)
+        await updateUsername(wallet, data.username)
+
+        const updated = await getUser(wallet)
 
         sendToUnity("OnUserData", JSON.stringify(updated))
     }

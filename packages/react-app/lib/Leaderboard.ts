@@ -36,7 +36,7 @@ export async function getLeaderboard(gameName: string) {
   const leaderboardQuery = query(
     ref(db, `leaderboards/${gameName}`),
     orderByChild("score"),
-    limitToLast(50)
+    limitToLast(200)
   )
   const snapshot = await get(leaderboardQuery)
 
@@ -44,5 +44,8 @@ export async function getLeaderboard(gameName: string) {
 
   const data = snapshot.val()
 
-  return Object.values(data).sort((a: any, b: any) => b.score - a.score)
+  return Object.values(data)
+    .filter((entry: any) => typeof entry?.score === "number")
+    .sort((a: any, b: any) => b.score - a.score)
+    .slice(0, 50)
 }

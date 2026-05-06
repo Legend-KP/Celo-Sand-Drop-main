@@ -1,4 +1,4 @@
-import { ref, get, runTransaction, update } from "firebase/database"
+import { ref, get, set, update } from "firebase/database"
 import { initFirebase, getFirebase } from "./firebase"
 
 function getMidnight() {
@@ -13,35 +13,6 @@ function getNextMidnight() {
     return d.getTime()
 }
 
-function normalizeDailyState(data: any) {
-    const today = getMidnight()
-
-    if (!data) {
-        return { data: null, today, wasReset: false }
-    }
-
-    if ((data.lastReset ?? 0) < today) {
-        return {
-            today,
-            wasReset: true,
-            data: {
-                ...data,
-                chances: 1,
-                lastReset: today
-            }
-        }
-    }
-
-    return { data, today, wasReset: false }
-}
-
-function withNextReset(data: any) {
-    return {
-        ...data,
-        nextReset: getNextMidnight()
-    }
-}
-
 export async function initUser(wallet: string, username: string) {
     await initFirebase()
 
@@ -51,16 +22,15 @@ export async function initUser(wallet: string, username: string) {
     console.log("🔥 INIT USER CALLED:", wallet)
 
     const userRef = ref(db, `users/${wallet}`)
+    const snap = await get(userRef)
 
-    await runTransaction(userRef, (current) => {
-        if (current) return current
-
-        return {
+    if (!snap.exists()) {
+        await set(userRef, {
             username,
             chances: 1,
             lastReset: getMidnight()
-        }
-    })
+        })
+    }
 }
 
 // ✅ GET USER + DAILY RESET
@@ -75,17 +45,23 @@ export async function getUser(wallet: string) {
 
     if (!snap.exists()) return null
 
-    const normalized = normalizeDailyState(snap.val())
-    const data = normalized.data
+    let data = snap.val()
+    const today = getMidnight()
 
-    if (normalized.wasReset) {
+    if (data.lastReset < today) {
+        data.chances = 1
+        data.lastReset = today
+
         await update(userRef, {
-            chances: data.chances,
-            lastReset: data.lastReset
+            chances: 1,
+            lastReset: today
         })
     }
 
-    return withNextReset(data)
+    return {
+        ...data,
+        nextReset: getNextMidnight()
+    }
 }
 
 // ✅ USE CHANCE
@@ -96,26 +72,17 @@ export async function consumeChance(wallet: string) {
     await authReady
 
     const userRef = ref(db, `users/${wallet}`)
-    const result = await runTransaction(userRef, (current) => {
-        const normalized = normalizeDailyState(current)
-        const data = normalized.data
+    const snap = await get(userRef)
 
-        if (!data || data.chances <= 0) return data
+    let data = snap.val()
 
-        return {
-            ...data,
-            chances: data.chances - 1,
-            lastReset: normalized.today
-        }
+    if (data.chances <= 0) return false
+
+    await update(userRef, {
+        chances: data.chances - 1
     })
 
-    if (!result.snapshot.exists()) return false
-
-    const updated = result.snapshot.val()
-
-    if ((updated.chances ?? 0) < 0) return false
-
-    return withNextReset(updated)
+    return true
 }
 
 export async function updateUsername(wallet: string, username: string) {
@@ -125,21 +92,10 @@ export async function updateUsername(wallet: string, username: string) {
     await authReady
 
     const userRef = ref(db, `users/${wallet}`)
-    const result = await runTransaction(userRef, (current) => {
-        const normalized = normalizeDailyState(current)
-        const data = normalized.data ?? {
-            chances: 1,
-            lastReset: normalized.today
-        }
 
-        return {
-            ...data,
-            username,
-            lastReset: normalized.today
-        }
+    await update(userRef, {
+        username: username
     })
-
-    return result.snapshot.exists() ? withNextReset(result.snapshot.val()) : null
 }
 
 // ✅ ADD CHANCES
@@ -150,19 +106,11 @@ export async function addChances(wallet: string, amount: number) {
     await authReady
 
     const userRef = ref(db, `users/${wallet}`)
-    const result = await runTransaction(userRef, (current) => {
-        const normalized = normalizeDailyState(current)
-        const data = normalized.data ?? {
-            chances: 1,
-            lastReset: normalized.today
-        }
+    const snap = await get(userRef)
 
-        return {
-            ...data,
-            chances: (data.chances || 0) + amount,
-            lastReset: normalized.today
-        }
+    let data = snap.val()
+
+    await update(userRef, {
+        chances: (data.chances || 0) + amount
     })
-
-    return result.snapshot.exists() ? withNextReset(result.snapshot.val()) : null
 }
