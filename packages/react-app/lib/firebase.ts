@@ -10,15 +10,13 @@ let auth: any = null;
 let authReady: Promise<void> | null = null;
 
 const firebaseConfig = {
-  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY || "AIzaSyBLlPjjvPFVaKOQlNBPkBH8l-P_7ZgtE1I",
-  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN || "sand-drop-minipay.firebaseapp.com",
-  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID || "sand-drop-minipay",
-  databaseURL:
-    process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL ||
-    "https://sand-drop-minipay-default-rtdb.firebaseio.com/",
-  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET || "sand-drop-minipay.firebasestorage.app",
-  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID || "639826879545",
-  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID || "1:639826879545:web:70e91fdf58723836a819e8",
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  databaseURL: process.env.NEXT_PUBLIC_FIREBASE_DATABASE_URL,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 // Function-based init (NOT auto-run)
