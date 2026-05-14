@@ -241,13 +241,13 @@ See the [open issues](https://github.com/celo-org/celo-composer/issues) for a fu
 
 ## Contributing
 
-We welcome contributions from the community.
+We welcome contributions from the community. See [CONTRIBUTING.md](CONTRIBUTING.md) for setup, branch naming, commit conventions, and a pull request checklist.
 
 <p align="right">(<a href="#top">back to top</a>)</p>
 
 ## License
 
-Distributed under the MIT License. See `LICENSE.txt` for more information.
+Distributed under the MIT License. See [LICENSE](LICENSE) for more information.
 
 <!-- CONTACT -->
 ## Contact
