@@ -1,0 +1,19 @@
+{
+    "name": "Flow Reminder - Day 9",
+    "description": "Those who flow as life flows, know they need no other force.",
+    "image": "/api/ipfs?cid=bafybeif4dgqs4q3ghqvjpz6cwda3zqcfctnqpwiomce6sy76prpn3zyphq",
+    "attributes": [
+      {
+        "trait_type": "Day",
+        "value": "9"
+      },
+      {
+        "trait_type": "Theme",
+        "value": "Action"
+      },
+      {
+        "trait_type": "Character",
+        "value": "Trenchy"
+      }
+    ]
+  }

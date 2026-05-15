@@ -1,0 +1,19 @@
+{
+    "name": "Flow Reminder - Day 7",
+    "description": "A wise man once said: nothing at all.",
+    "image": "/api/ipfs?cid=bafybeicx6vb2vzw7mbywzn6xuuswnq2widfrbsb4uc72weoein2lftpkha",
+    "attributes": [
+      {
+        "trait_type": "Day",
+        "value": "7"
+      },
+      {
+        "trait_type": "Theme",
+        "value": "Wu Wei"
+      },
+      {
+        "trait_type": "Character",
+        "value": "Trenchy"
+      }
+    ]
+  }
