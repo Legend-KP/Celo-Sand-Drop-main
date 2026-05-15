@@ -1,0 +1,44 @@
+{
+  "name": "farcaster-personality-agent",
+  "version": "1.0.0",
+  "description": "Autonomous AI agents on Farcaster with Schwartz Value Theory personality profiles",
+  "main": "run.js",
+  "scripts": {
+    "setup": "node setup.js",
+    "register": "node register-with-openclaw.js",
+    "register:simple": "node register-simple.js",
+    "register:fixed": "node register-fixed.js",
+    "register:manual": "node register-manual.js",
+    "complete-setup": "node complete-setup.js",
+    "run": "node run.js",
+    "run:explorer": "node run.js explorer",
+    "run:achiever": "node run.js achiever",
+    "run:guardian": "node run.js guardian",
+    "run:connector": "node run.js connector",
+    "run:maverick": "node run.js maverick",
+    "run-enhanced": "node run-enhanced.js"
+  },
+  "keywords": [
+    "farcaster",
+    "agent",
+    "personality",
+    "schwartz-values",
+    "openclaw"
+  ],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@farcaster/hub-nodejs": "^0.13.0",
+    "@noble/hashes": "^1.4.0",
+    "dotenv": "^16.4.5",
+    "ethers": "^6.13.0",
+    "node-fetch": "^2.7.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.6.0"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}
