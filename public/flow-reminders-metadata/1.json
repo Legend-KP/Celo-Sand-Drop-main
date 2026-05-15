@@ -1,0 +1,19 @@
+{
+    "name": "Flow Reminder - Day 2",
+    "description": "let go of urgency. make space for stillness.",
+    "image": "/api/ipfs?cid=bafybeia65woni6fo5b3iyyk6g527n3wlidfh2ptvsprd5pgx7fnkj4okkm",
+    "attributes": [
+      {
+        "trait_type": "Day",
+        "value": "2"
+      },
+      {
+        "trait_type": "Theme",
+        "value": "Joy"
+      },
+      {
+        "trait_type": "Character",
+        "value": "Trenchy"
+      }
+    ]
+  }

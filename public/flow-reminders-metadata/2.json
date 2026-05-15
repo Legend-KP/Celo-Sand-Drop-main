@@ -1,0 +1,19 @@
+{
+    "name": "Flow Reminder - Day 3",
+    "description": "There is no way to happiness. Happiness is the way.",
+    "image": "/api/ipfs?cid=bafybeifpehjqlp52yif3mssynscpydua2r7imeewwk4zwyr6fcyujodzmi",
+    "attributes": [
+      {
+        "trait_type": "Day",
+        "value": "3"
+      },
+      {
+        "trait_type": "Theme",
+        "value": "Reward"
+      },
+      {
+        "trait_type": "Character",
+        "value": "Trenchy"
+      }
+    ]
+  }

@@ -1,0 +1,19 @@
+{
+    "name": "Flow Reminder - Day 8",
+    "description": "If you are quiet enough, you will hear the flow of the universe.\nYou will feel its rhythm.\nGo with this flow.",
+    "image": "/api/ipfs?cid=bafybeif4y5g7t64mcoxb43kxi3kw3ddyqrd3xena2j3fiwmesglbioeuzi",
+    "attributes": [
+      {
+        "trait_type": "Day",
+        "value": "8"
+      },
+      {
+        "trait_type": "Theme",
+        "value": "Adaptability"
+      },
+      {
+        "trait_type": "Character",
+        "value": "Trenchy"
+      }
+    ]
+  }

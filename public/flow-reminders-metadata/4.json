@@ -1,0 +1,19 @@
+{
+    "name": "Flow Reminder - Day 5",
+    "description": "Like a finger pointing to the moon, if you look at the finger, you miss all the glory of the universe.\nSometimes don't think...\njust feel.",
+    "image": "/api/ipfs?cid=bafybeibvexz2rdfue3pkfeh4wxprp7siyidj4qnrylv7fczh5kwmn43vte",
+    "attributes": [
+      {
+        "trait_type": "Day",
+        "value": "5"
+      },
+      {
+        "trait_type": "Theme",
+        "value": "Clarity"
+      },
+      {
+        "trait_type": "Character",
+        "value": "Trenchy"
+      }
+    ]
+  }
