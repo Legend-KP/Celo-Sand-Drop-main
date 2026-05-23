@@ -1,0 +1,12 @@
+{
+  "folders": [
+    {
+      "name": "Arrow Out",
+      "path": "farcaster-arrow-out"
+    }
+  ],
+  "settings": {
+    "typescript.tsdk": "farcaster-arrow-out/node_modules/typescript/lib",
+    "typescript.enablePromptUseWorkspaceTsdk": true
+  }
+}
