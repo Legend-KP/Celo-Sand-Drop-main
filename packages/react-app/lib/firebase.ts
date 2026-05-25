@@ -27,8 +27,8 @@ export function initFirebase() {
 
   app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApps()[0]; // getApps() is a function that returns the apps for the firebase database /
 
-  db = getDatabase(app, firebaseConfig.databaseURL);
-  auth = getAuth(app);
+  db = getDatabase(app, firebaseConfig.databaseURL); // getDatabase() is a function that returns the database for the firebase database 
+  auth = getAuth(app); // getAuth() is a function that returns the auth for the firebase database 
 
   let resolveAuthReady!: () => void;
 
