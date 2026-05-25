@@ -30,7 +30,7 @@ export function initFirebase() {
   db = getDatabase(app, firebaseConfig.databaseURL); // getDatabase() is a function that returns the database for the firebase database 
   auth = getAuth(app); // getAuth() is a function that returns the auth for the firebase database 
 
-  let resolveAuthReady!: () => void;
+  let resolveAuthReady!: () => void; // resolveAuthReady is a function that resolves the auth ready promise 
 
   authReady = new Promise<void>((resolve) => {
     resolveAuthReady = resolve;
