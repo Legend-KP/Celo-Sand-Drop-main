@@ -9,7 +9,7 @@ function getNextMidnight() {
 
 export async function getUser(wallet: string) {
     if (!wallet) return null
-
+ // api/getUser is a custom endpoint that is defined in the server.ts file 
     const res = await fetch("/api/getUser", {
         method: "POST",
         headers: {
