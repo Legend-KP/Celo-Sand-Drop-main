@@ -10,7 +10,7 @@
             "custom_domain": true
         }
     ],
-
+// assets is a directory that contains the assets for the website  
     "assets": {
         "directory": ".open-next/assets",
         "binding": "ASSETS"
