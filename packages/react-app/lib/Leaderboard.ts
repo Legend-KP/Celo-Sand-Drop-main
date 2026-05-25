@@ -17,13 +17,13 @@ export async function saveScore(
     }),
   })
 }
-
+// api/getLeaderboard is a custom endpoint that is defined in the server.ts file 
 export async function getLeaderboard(gameName: string) {
   const res = await fetch("/api/getLeaderboard", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
-    },
+    }, // headers is a dictionary that contains the headers for the request 
     body: JSON.stringify({ gameName }),
   })
 
