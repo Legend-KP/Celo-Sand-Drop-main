@@ -15,6 +15,7 @@ function getAuthQuery(): string {
     return `auth=${encodeURIComponent(secret)}`
 }
 
+// makeUrl is a function that makes a url for the firebase database 
 function makeUrl(path: string): string {
     const cleanPath = path.replace(/^\/+/, "")
     return `${getBaseUrl()}/${cleanPath}.json?${getAuthQuery()}`
