@@ -25,6 +25,7 @@ type Snapshot = {
     exists: () => boolean
     val: () => any
 }
+// createSnapshot is a function that creates a snapshot of the firebase database 
 
 function createSnapshot(value: any): Snapshot {
     return {
