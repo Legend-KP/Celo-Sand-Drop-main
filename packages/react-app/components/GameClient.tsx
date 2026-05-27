@@ -10,7 +10,7 @@ const USDT: Address = "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
 
 export default function Home() {
 
-    const userLoaded = useRef(false)
+    const userLoaded = useRef(false) // USE REF TO STORE THE USER LOADED STATE
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(() => {
