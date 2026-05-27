@@ -17,7 +17,7 @@ export async function POST(req: Request) {
 
         const data = snap.val() // GET THE LEADERBOARD DATA
         const leaderboard = Object.values(data)
-            .sort((a: any, b: any) => b.score - a.score)
+            .sort((a: any, b: any) => b.score - a.score)    
             .slice(0, 50)
 
         return NextResponse.json(leaderboard)
