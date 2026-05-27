@@ -11,7 +11,7 @@ export async function POST(req: Request) {
     try {
         const { wallet } = await req.json()
 
-        if (!wallet) {
+        if (!wallet) { // CHECK IF THE WALLET IS VALID
             return NextResponse.json({ error: "Invalid wallet" }, { status: 400 })
         }
 
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
         }
 
         const data = snap.val()
-        const today = getMidnight()
+        const today = getMidnight() // GET THE CURRENT DATE
         const lastReset = typeof data.lastReset === "number" ? data.lastReset : today
         const nextReset = lastReset + 86400000
 
