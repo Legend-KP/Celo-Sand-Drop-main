@@ -9,7 +9,7 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Invalid data" }, { status: 400 })
         }
 
-        await db.ref(`users/${wallet}`).update({ // UPDATE THE USERNAME
+        await db.ref(`users/${wallet}`).update({ // UPDATE THE USERNAME DATA
             username
         })
 
