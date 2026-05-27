@@ -5,7 +5,7 @@ export async function POST(req: Request) {
     try {
         const { gameName } = await req.json()
 
-        if (!gameName || typeof gameName !== "string") {
+        if (!gameName || typeof gameName !== "string") { // CHECK IF THE GAME NAME IS VALID
             return NextResponse.json({ error: "Invalid game name" }, { status: 400 })
         }
 
