@@ -9,13 +9,13 @@ export async function POST(req: Request) {
             return NextResponse.json({ error: "Invalid game name" }, { status: 400 })
         }
 
-        const snap = await db.ref(`leaderboards/${gameName}`).get()
+        const snap = await db.ref(`leaderboards/${gameName}`).get() // GET THE LEADERBOARD DATA
 
         if (!snap.exists()) {
-            return NextResponse.json([])
+            return NextResponse.json([]) // IF THE LEADERBOARD DOES NOT EXIST, RETURN AN EMPTY ARRAY
         }
 
-        const data = snap.val()
+        const data = snap.val() // GET THE LEADERBOARD DATA
         const leaderboard = Object.values(data)
             .sort((a: any, b: any) => b.score - a.score)
             .slice(0, 50)
