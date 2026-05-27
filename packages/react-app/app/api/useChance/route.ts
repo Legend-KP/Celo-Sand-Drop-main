@@ -12,11 +12,11 @@ export async function POST(req: Request) {
         const { wallet } = await req.json()
         const walletKey = wallet?.trim()
 
-        if (!walletKey) {
+        if (!walletKey) { // CHECK IF THE WALLET IS VALID
             return NextResponse.json({ error: "Invalid wallet" }, { status: 400 })
         }
 
-        const today = getMidnight()
+        const today = getMidnight() // GET THE CURRENT DATE
         const ref = db.ref(`users/${walletKey}`)
 
         // Read current data
