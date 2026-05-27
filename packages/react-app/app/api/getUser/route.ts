@@ -35,7 +35,7 @@ export async function POST(req: Request) {
                 chances: 1,
                 lastReset: today
             }
-            await db.ref(`users/${wallet}`).set(updated)
+            await db.ref(`users/${wallet}`).set(updated) // SET THE UPDATED DATA
             return NextResponse.json({
                 ...updated,
                 nextReset: today + 86400000
