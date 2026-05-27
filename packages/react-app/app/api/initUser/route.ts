@@ -13,11 +13,11 @@ export async function POST(req: Request) {
         const walletKey = wallet?.trim()
         const safeUsername = username?.trim()
 
-        if (!walletKey || !safeUsername) {
+        if (!walletKey || !safeUsername) { // CHECK IF THE WALLET AND USERNAME ARE VALID
             return NextResponse.json({ error: "Invalid data" }, { status: 400 })
         }
 
-        const ref = db.ref(`users/${walletKey}`)
+        const ref = db.ref(`users/${walletKey}`) // GET THE USER DATA
         const snap = await ref.get()
 
         // ? Only create if NOT exists
