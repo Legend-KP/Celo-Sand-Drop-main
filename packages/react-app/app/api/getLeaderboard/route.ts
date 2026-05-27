@@ -5,19 +5,19 @@ export async function POST(req: Request) {
     try {
         const { gameName } = await req.json()
 
-        if (!gameName || typeof gameName !== "string") { // CHECK IF THE GAME NAME IS VALID
+        if (!gameName || typeof gameName !== "string") {
             return NextResponse.json({ error: "Invalid game name" }, { status: 400 })
         }
 
-        const snap = await db.ref(`leaderboards/${gameName}`).get() // GET THE LEADERBOARD DATA
+        const snap = await db.ref(`leaderboards/${gameName}`).get()
 
         if (!snap.exists()) {
-            return NextResponse.json([]) // IF THE LEADERBOARD DOES NOT EXIST, RETURN AN EMPTY ARRAY
+            return NextResponse.json([])
         }
 
-        const data = snap.val() // GET THE LEADERBOARD DATA
+        const data = snap.val()
         const leaderboard = Object.values(data)
-            .sort((a: any, b: any) => b.score - a.score)    
+            .sort((a: any, b: any) => b.score - a.score)
             .slice(0, 50)
 
         return NextResponse.json(leaderboard)
