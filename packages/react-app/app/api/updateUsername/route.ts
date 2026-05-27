@@ -5,7 +5,7 @@ export async function POST(req: Request) {
     try {
         const { wallet, username } = await req.json()
 
-        if (!wallet || !username) {
+        if (!wallet || !username) { // CHECK IF THE WALLET AND USERNAME ARE VALID
             return NextResponse.json({ error: "Invalid data" }, { status: 400 })
         }
 
