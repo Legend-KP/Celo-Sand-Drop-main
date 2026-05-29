@@ -31,7 +31,7 @@ function createSnapshot(value: any): Snapshot {
     return {
         exists: () => value !== null && value !== undefined,
         val: () => value
-    }
+    } 
 }
 
 async function fetchJson(url: string, init?: RequestInit): Promise<any> {
