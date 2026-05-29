@@ -25,7 +25,7 @@ export async function getUser(wallet: string) {
 
     return await res.json() 
 }
-
+ 
 // ✅ INIT USER (API)
 export async function initUser(wallet: string, username: string) {
     await fetch("/api/initUser", {
