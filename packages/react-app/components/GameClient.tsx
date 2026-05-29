@@ -53,10 +53,10 @@ export default function Home() {
 
         const handleUnityMessage = async (event: any) => {
             const data = event.data
-            if (!data) return
+            if (!data) return 
 
             switch (data.type) {
-                case "UNITY_PAY_ENTRY":
+                case "UNITY_PAY_ENTRY": //
                     await handlePayment()
                     break
                 case "UNITY_SAVE_SCORE":
@@ -68,7 +68,7 @@ export default function Home() {
                 case "UNITY_INIT_USER":
                     await handleInitUser(data)
                     break
-                case "UNITY_GET_USER":
+                case "UNITY_GET_USER": 
                     await handleGetUser()
                     break
                 case "UNITY_USE_CHANCE":
