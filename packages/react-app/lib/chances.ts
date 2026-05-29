@@ -17,13 +17,13 @@ export async function getUser(wallet: string) {
         },
         body: JSON.stringify({ wallet })
     })
-
+ 
     if (!res.ok) {
         console.error("getUser API failed")
         return null
     }
 
-    return await res.json()
+    return await res.json() 
 }
 
 // ✅ INIT USER (API)
