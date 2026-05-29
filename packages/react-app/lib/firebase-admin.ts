@@ -42,7 +42,7 @@ async function fetchJson(url: string, init?: RequestInit): Promise<any> {
     }
     return res.json()
 }
-
+ 
 export const db = {
     ref(path: string) {
         const url = makeUrl(path)
