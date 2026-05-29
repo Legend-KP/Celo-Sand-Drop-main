@@ -77,12 +77,12 @@ export default function Home() {
                 case "UNITY_BUY_CHANCES":
                     await handleBuyChances()
                     break
-                case "UNITY_UPDATE_USERNAME":
+                case "UNITY_UPDATE_USERNAME": 
                     await handleUpdateUsername(data)
                     break
             }
         }
-
+ 
         window.addEventListener("message", handleUnityMessage)
 
         return () => {
