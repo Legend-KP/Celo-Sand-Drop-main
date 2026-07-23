@@ -4,13 +4,19 @@
     "compatibility_date": "2024-12-01",
     "compatibility_flags": ["nodejs_compat"],
     "keep_vars": true,
+    "vars": {
+        // Workaround for OpenNext/Workers: Next.js dynamic require of
+        // middleware-manifest.json is unsupported and 500s every route.
+        // Safe here — this app has no middleware.ts.
+        "NEXT_PRIVATE_MINIMAL_MODE": "1"
+    },
     "routes": [
         {
             "pattern": "sanddrop2.trenchverse.com",
             "custom_domain": true
         }
     ],
-// assets is a directory that contains the assets for the website  
+    // assets is a directory that contains the assets for the website
     "assets": {
         "directory": ".open-next/assets",
         "binding": "ASSETS"
