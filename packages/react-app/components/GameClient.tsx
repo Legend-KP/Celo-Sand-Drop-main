@@ -3,7 +3,8 @@ import { useEffect, useRef } from "react"
 import { saveScore, getLeaderboard } from "@/lib/Leaderboard"
 import { encodeFunctionData } from "viem"
 import { initUser, getUser, consumeChance, addChances, updateUsername } from "@/lib/chances"
-import type { Address } from "viem"
+import { appendAttributionSuffix } from "@/lib/attribution"
+import type { Address, Hex } from "viem"
 const CONTRACT: Address = "0xafFb98DeCfc3e1E7867fA412Bf9580E377bE265a"
 const USDT: Address = "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
 
@@ -172,7 +173,7 @@ export default function Home() {
                     params: [{
                         from: user,
                         to: USDT,
-                        data: approveData
+                        data: appendAttributionSuffix(approveData as Hex)
                     }]
                 });
 
@@ -203,7 +204,7 @@ export default function Home() {
                 params: [{
                     from: user,
                     to: CONTRACT,
-                    data: payData
+                    data: appendAttributionSuffix(payData as Hex)
                 }]
             });
 
@@ -443,7 +444,7 @@ export default function Home() {
                     params: [{
                         from: user,
                         to: USDT,
-                        data: approveData
+                        data: appendAttributionSuffix(approveData as Hex)
                     }]
                 });
 
@@ -468,7 +469,7 @@ export default function Home() {
                 params: [{
                     from: user,
                     to: BUY_CONTRACT,
-                    data: payData
+                    data: appendAttributionSuffix(payData as Hex)
                 }]
             })
 

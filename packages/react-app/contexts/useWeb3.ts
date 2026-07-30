@@ -11,6 +11,7 @@ import {
     stringToHex,
 } from "viem";
 import { celoAlfajores } from "viem/chains";
+import { getAttributionSuffix } from "@/lib/attribution";
 
 const publicClient = createPublicClient({
     chain: celoAlfajores,
@@ -44,6 +45,7 @@ export const useWeb3 = () => {
         let [address] = await walletClient.getAddresses();
 
         const amountInWei = parseEther(amount);
+        const dataSuffix = getAttributionSuffix();
 
         const tx = await walletClient.writeContract({
             address: cUSDTokenAddress,
@@ -51,6 +53,7 @@ export const useWeb3 = () => {
             functionName: "transfer",
             account: address,
             args: [to, amountInWei],
+            ...(dataSuffix ? { dataSuffix } : {}),
         });
 
         let receipt = await publicClient.waitForTransactionReceipt({
@@ -68,6 +71,8 @@ export const useWeb3 = () => {
 
         let [address] = await walletClient.getAddresses();
 
+        const dataSuffix = getAttributionSuffix();
+
         const tx = await walletClient.writeContract({
             address: MINIPAY_NFT_CONTRACT,
             abi: MinipayNFTABI.abi,
@@ -77,6 +82,7 @@ export const useWeb3 = () => {
                 address,
                 "https://cdn-production-opera-website.operacdn.com/staticfiles/assets/images/sections/2023/hero-top/products/minipay/minipay__desktop@2x.a17626ddb042.webp",
             ],
+            ...(dataSuffix ? { dataSuffix } : {}),
         });
 
         const receipt = await publicClient.waitForTransactionReceipt({
