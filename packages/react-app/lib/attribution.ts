@@ -1,42 +1,50 @@
-import { codeFromHostname, toDataSuffix } from "@celo/attribution-tags"
+import { toDataSuffix } from "@celo/attribution-tags"
 import { concat } from "viem"
 import type { Hex } from "viem"
 
-const ASSIGNED_TAG_CODE = process.env.NEXT_PUBLIC_CELO_ATTRIBUTION_CODE?.trim().toLowerCase()
-
 let cachedSuffix: Hex | undefined
-let warnedAboutInvalidCode = false
+let loadPromise: Promise<Hex | undefined> | null = null
 
 function isValidAttributionCode(code: string) {
-  return /^[a-z0-9_]{1,32}$/.test(code)
+    return /^[a-z0-9_]{1,32}$/.test(code)
 }
 
-export function getAttributionSuffix(): Hex | undefined {
-  if (typeof window === "undefined") return undefined
-  if (cachedSuffix) return cachedSuffix
+async function loadAttributionSuffix(): Promise<Hex | undefined> {
+    if (cachedSuffix) return cachedSuffix
+    if (loadPromise) return loadPromise
 
-  try {
-    const codes = new Set<string>()
-    codes.add(codeFromHostname(window.location.hostname))
+    loadPromise = (async () => {
+        try {
+            const res = await fetch("/api/attribution-code")
+            if (!res.ok) return undefined
 
-    if (ASSIGNED_TAG_CODE) {
-      if (isValidAttributionCode(ASSIGNED_TAG_CODE)) {
-        codes.add(ASSIGNED_TAG_CODE)
-      } else if (!warnedAboutInvalidCode) {
-        warnedAboutInvalidCode = true
-        console.warn("NEXT_PUBLIC_CELO_ATTRIBUTION_CODE is invalid and will be ignored.")
-      }
+            const { code } = await res.json()
+            const normalized = code?.trim().toLowerCase()
+            if (!normalized || !isValidAttributionCode(normalized)) return undefined
+
+            cachedSuffix = toDataSuffix(normalized) as Hex
+            return cachedSuffix
+        } catch {
+            return undefined
+        }
+    })()
+
+    return loadPromise
+}
+
+export async function getAttributionSuffix(): Promise<Hex | undefined> {
+    if (typeof window === "undefined") return undefined
+    return loadAttributionSuffix()
+}
+
+export async function appendAttributionSuffix(data: Hex): Promise<Hex> {
+    const suffix = await getAttributionSuffix()
+    if (!suffix) return data
+    return concat([data, suffix])
+}
+
+export function preloadAttributionSuffix(): void {
+    if (typeof window !== "undefined") {
+        void loadAttributionSuffix()
     }
-
-    cachedSuffix = toDataSuffix([...codes]) as Hex
-    return cachedSuffix
-  } catch {
-    return undefined
-  }
-}
-
-export function appendAttributionSuffix(data: Hex): Hex {
-  const suffix = getAttributionSuffix()
-  if (!suffix) return data
-  return concat([data, suffix])
 }

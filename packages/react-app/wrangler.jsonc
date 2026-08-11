@@ -9,6 +9,7 @@
         // middleware-manifest.json is unsupported and 500s every route.
         // Safe here — this app has no middleware.ts.
         "NEXT_PRIVATE_MINIMAL_MODE": "1"
+        // Set CELO_ATTRIBUTION_CODE in Cloudflare dashboard → Workers → Variables
     },
     "routes": [
         {

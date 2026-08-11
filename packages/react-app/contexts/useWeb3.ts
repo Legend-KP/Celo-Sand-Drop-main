@@ -45,7 +45,7 @@ export const useWeb3 = () => {
         let [address] = await walletClient.getAddresses();
 
         const amountInWei = parseEther(amount);
-        const dataSuffix = getAttributionSuffix();
+        const dataSuffix = await getAttributionSuffix();
 
         const tx = await walletClient.writeContract({
             address: cUSDTokenAddress,
@@ -71,7 +71,7 @@ export const useWeb3 = () => {
 
         let [address] = await walletClient.getAddresses();
 
-        const dataSuffix = getAttributionSuffix();
+        const dataSuffix = await getAttributionSuffix();
 
         const tx = await walletClient.writeContract({
             address: MINIPAY_NFT_CONTRACT,

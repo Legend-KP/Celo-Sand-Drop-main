@@ -17,8 +17,10 @@ Provide the WalletConnect Cloud Project ID in your `.env` file to use WalletConn
 
 ```typescript
 NEXT_PUBLIC_WC_PROJECT_ID=YOUR_EXAMPLE_PROJECT_ID;
-NEXT_PUBLIC_CELO_ATTRIBUTION_CODE=YOUR_PRIVATE_CELO_CODE
+CELO_ATTRIBUTION_CODE=YOUR_PRIVATE_CELO_CODE
 ```
+
+For production on Cloudflare, set `CELO_ATTRIBUTION_CODE` in **Workers & Pages → your project → Settings → Variables** (not in source code).
 
 ### Install dependencies
 

@@ -3,7 +3,7 @@ import { useEffect, useRef } from "react"
 import { saveScore, getLeaderboard } from "@/lib/Leaderboard"
 import { encodeFunctionData } from "viem"
 import { initUser, getUser, consumeChance, addChances, updateUsername } from "@/lib/chances"
-import { appendAttributionSuffix } from "@/lib/attribution"
+import { appendAttributionSuffix, preloadAttributionSuffix } from "@/lib/attribution"
 import type { Address, Hex } from "viem"
 const CONTRACT: Address = "0xafFb98DeCfc3e1E7867fA412Bf9580E377bE265a"
 const USDT: Address = "0x48065fbBE25f71C9282ddf5e1cD6D6A887483D5e"
@@ -25,6 +25,10 @@ export default function Home() {
 
         preload()
 
+    }, [])
+
+    useEffect(() => {
+        preloadAttributionSuffix()
     }, [])
 
     useEffect(() => {
@@ -173,7 +177,7 @@ export default function Home() {
                     params: [{
                         from: user,
                         to: USDT,
-                        data: appendAttributionSuffix(approveData as Hex)
+                        data: await appendAttributionSuffix(approveData as Hex)
                     }]
                 });
 
@@ -204,7 +208,7 @@ export default function Home() {
                 params: [{
                     from: user,
                     to: CONTRACT,
-                    data: appendAttributionSuffix(payData as Hex)
+                    data: await appendAttributionSuffix(payData as Hex)
                 }]
             });
 
@@ -444,7 +448,7 @@ export default function Home() {
                     params: [{
                         from: user,
                         to: USDT,
-                        data: appendAttributionSuffix(approveData as Hex)
+                        data: await appendAttributionSuffix(approveData as Hex)
                     }]
                 });
 
@@ -469,7 +473,7 @@ export default function Home() {
                 params: [{
                     from: user,
                     to: BUY_CONTRACT,
-                    data: appendAttributionSuffix(payData as Hex)
+                    data: await appendAttributionSuffix(payData as Hex)
                 }]
             })
 
